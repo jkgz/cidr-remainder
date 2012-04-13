@@ -1,8 +1,8 @@
 require 'rubygems' if RUBY_VERSION < "1.9"
-require 'sinatra/base'
+require 'sinatra'
 require 'erb'
 
-class MyApp < Sinatra::Base
+
   get '/' do
     @foo = 'click the button'
     erb :index
@@ -12,6 +12,5 @@ class MyApp < Sinatra::Base
   	    @foo = 'result'
     erb :index
   end
-end
 
-MyApp.run!
+
