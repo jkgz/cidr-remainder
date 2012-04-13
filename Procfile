@@ -1,1 +1,1 @@
-web: bundle exec ruby calc.rb -p $PORT
+web: bundle exec ruby calc2.rb -p $PORT
