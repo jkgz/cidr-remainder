@@ -6,17 +6,30 @@
 	<body>
 
 		<form method="POST" action="/">
-			
-		<div>Network:</div>
-		<textarea name="network" rows="10" cols="30"><%= @network %></textarea>
-		<div>Blacklist:</div>
-		<textarea name="blacklist" rows="10" cols="30"><%= @blacklist %></textarea>
-		<div>
-  			<%= @result %>
-		</div>
-		<div>
-			<input type="submit" name="submit" />		
-		</div>
+			<table border="0">
+				<tr>
+					<td>
+				<div>Network:</div>
+				<textarea name="network" rows="10" cols="30"><%= @network %></textarea>
+				<div>Blacklist:</div>
+				<textarea name="blacklist" rows="10" cols="30"><%= @blacklist %></textarea>
+					</td>
+					<td>
+						<div>
+				  			
+				  			<% if @result %>
+					  			<% for @item in @result %>
+					    			<%= @item %></br>
+					  			<% end %>
+				  			<% end %>
+						</div>
+						
+					</td>
+				<tr>
+			</table>
+			<div>
+				<input type="submit" name="submit" />		
+			</div>
 		</form>
 	</body>
 </html>

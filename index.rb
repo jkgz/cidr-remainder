@@ -5,8 +5,8 @@ require 'calc-cidr-whitelist'
 
 
   get '/' do
-  	@network = '10.*'
-  	@blacklist = '10.3.*.*'
+  	@network = '10.0.0.0/8'
+  	@blacklist = '10.3.0.0/16'
     erb :index
   end
 

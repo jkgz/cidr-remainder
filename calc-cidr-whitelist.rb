@@ -18,7 +18,7 @@ end
 
 def to_cidr_list(input)
 	#TODO: would be better to do auto-detection of input_type, but this will do for now.
-	input_type = "wildcard"
+	input_type = "cidr"
 
 	input.map! {|item| item.strip}
 
