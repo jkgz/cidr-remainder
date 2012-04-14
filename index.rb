@@ -1,7 +1,7 @@
 require 'rubygems' if RUBY_VERSION < "1.9"
 require 'sinatra'
 require 'erb'
-require 'calc-cidr-whitelist'
+require './calc-cidr-whitelist'
 
 
   get '/' do
