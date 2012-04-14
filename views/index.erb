@@ -6,13 +6,27 @@
 	<body>
 
 		<form method="POST" action="/">
-			<table border="0">
+			<table border="0" cellpadding="3">
 				<tr>
 					<td>
-				<div>Network:</div>
-				<textarea name="network" rows="10" cols="30"><%= @network %></textarea>
-				<div>Blacklist:</div>
-				<textarea name="blacklist" rows="10" cols="30"><%= @blacklist %></textarea>
+						Network
+					</td>
+					<td>
+						Blacklist
+					</td>
+					<td>
+						Result
+					</td>
+				</tr>
+				<tr valign="top">
+					<td>
+						<textarea name="network" rows="20" cols="20"><%= @network %></textarea>
+						<div>
+							<input type="submit" name="submit" />		
+						</div>
+					</td>
+					<td>
+						<textarea name="blacklist" rows="20" cols="20"><%= @blacklist %></textarea>
 					</td>
 					<td>
 						<div>
@@ -27,9 +41,7 @@
 					</td>
 				<tr>
 			</table>
-			<div>
-				<input type="submit" name="submit" />		
-			</div>
+
 		</form>
 	</body>
 </html>
