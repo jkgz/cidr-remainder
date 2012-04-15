@@ -9,24 +9,24 @@
 			<table border="0" cellpadding="3">
 				<tr>
 					<td>
-						Network
+						Network <% if @network_size %>(<%= @network_size %> IPs)<% end %>
 					</td>
 					<td>
-						Blacklist
+						Blacklist <% if @blacklist_size %>(<%= @blacklist_size %> IPs)<% end %>
 					</td>
 					<td>
-						Result <% if @result %>(<%= @result.size%>)<% end %>
+						Result <% if @result %>(<%= @result_size%> IPs)<% end %>
 					</td>
 				</tr>
 				<tr valign="top">
 					<td>
-						<textarea name="network" rows="20" cols="20"><%= @network %></textarea>
-						<div>
-							<input type="submit" name="submit" />		
+						<textarea name="network" rows="20" cols="30"><%= @network %></textarea>
+						<div style="margin-top:10px;">
+							<input type="submit" name="submit" value="Calc Result"/>	
 						</div>
 					</td>
 					<td>
-						<textarea name="blacklist" rows="20" cols="20"><%= @blacklist %></textarea>
+						<textarea name="blacklist" rows="20" cols="30"><%= @blacklist %></textarea>
 					</td>
 					<td>
 						<div>

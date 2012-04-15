@@ -11,12 +11,17 @@ require './calc-cidr-whitelist'
   end
 
   post '/' do
-  	network = to_array(params['network'])
-  	blacklist = to_array(params['blacklist'])
+  	network = to_list(params['network'])
+  	blacklist = to_list(params['blacklist'])
 
   	@network = to_string(network)
   	@blacklist = to_string(blacklist)
+
+  	@network_size = calc_size(network)
+  	@blacklist_size = calc_size(blacklist)
+
   	@result = calc_result(network, blacklist)
+  	@result_size = calc_size(@result)
     erb :index
   end
 

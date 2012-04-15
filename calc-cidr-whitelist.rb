@@ -16,25 +16,25 @@ def read_file(filename)
 	return IO.readlines(filename)
 end
 
-def to_array(input_string)
-	input = input_string.split("\r\n")
-	input.map! {|item| item.strip}
-	input.reject! { |item| item.empty? }
-	return input
+def to_list(input_string)
+	list = input_string.split("\r\n")
+	list.map!(&:strip)
+	list.reject!(&:empty?)
+	return list
 end
 
 def to_string(input_array)
 	return input_array.join("\r\n")
 end
 
-def to_cidr_list(input)
-	#TODO: would be better to do auto-detection of input_type, but this will do for now.
-	input_type = "cidr"
+def to_cidr_list(list)
+	#TODO: would be better to do auto-detection of addr_type, but this will do for now.
+	addr_type = "cidr"
 
-	if input_type == "cidr"
-		cidr_list = input.map {|item| NetAddr::CIDR.create(item)} 
-	elsif input_type == "wildcard"
-		cidr_list = input.map {|item| NetAddr.wildcard(item)}
+	if addr_type == "cidr"
+		cidr_list = list.map {|item| NetAddr::CIDR.create(item)} 
+	elsif addr_type == "wildcard"
+		cidr_list = list.map {|item| NetAddr.wildcard(item)}
 	end
 	
 	return cidr_list
@@ -51,6 +51,11 @@ def calc_result(network, blacklist)
 	end
 
 	return NetAddr.merge(network)
+end
+
+def calc_size(network)
+	network = to_cidr_list(network)
+	return network.map(&:size).reduce(:+)
 end
 
 # TODO: the code to support input ranges for whitelist/blacklist would use NetAddr.range and then .merge that down into CIDR blocks
