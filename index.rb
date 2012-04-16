@@ -5,8 +5,8 @@ require './calc-cidr-whitelist'
 
 
   get '/' do
-  	@network = to_string(Array.[]('10.4.0.0/16', '172.0.0.0/8'))
-  	@blacklist = to_string(Array.[]('10.4.99.0/24', '172.6.0.0/16'))
+  	@network = to_string(Array.[]('10.4.0.0/16', '172.*.*.*'))
+  	@blacklist = to_string(Array.[]('10.4.99.0/24', '10.4.100.*', '172.6.*.*'))
     erb :index
   end
 

@@ -24,21 +24,24 @@ def to_string(input_array)
 end
 
 def to_cidr_list(list)
-	#TODO: would be better to do auto-detection of addr_type, but this will do for now.
-	addr_type = "cidr"
 
-	if addr_type == "cidr"
-		cidr_list = list.map {|item| NetAddr::CIDR.create(item)} 
-	elsif addr_type == "wildcard"
-		cidr_list = list.map {|item| NetAddr.wildcard(item)}
+	#TODO: this is pretty basic auto detect of wildcard vs CIDR format.  Would like to add support for IP ranges and some actual validation/error handling
+	cidr_list = list.reduce([]) do |result, element|
+		if element.include?("*")
+			result << NetAddr.wildcard(element)
+		elsif element.include?("/")
+			result << NetAddr::CIDR.create(element)
+		end	
+		result
 	end
-	
+
 	return cidr_list
 end
 
 def calc_result(network, blacklist)
 	network = to_cidr_list(network)
 	blacklist = to_cidr_list(blacklist)
+	
 	blacklist.each do |blacklist_addr|
 		network = calc_remainder(network, blacklist_addr)
 	end
