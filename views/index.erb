@@ -2,56 +2,104 @@
 <html>
 	<head>
 		<title>CIDR Remainder Calculator</title>
+		<link href="./css/bootstrap.css" rel="stylesheet">
+		    <style type="text/css">
+		      body {
+		        padding-top: 60px;
+		        padding-bottom: 40px;
+		      }
+		      .sidebar-nav {
+		        padding: 9px 0;
+		      }
+		    </style>
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
 	</head>
 	<body>
-		<h2>Bulk CIDR Remainder Calculator</h2>
-		<p>
-			Calculate a remainder CIDR block from a starting list of networks and a list of blacklist networks  
-		</p>
-		<p>
-			Supports these input formats:
-			<ul>
-				<li>CIDR - 10.4.0.0/16</li>
-				<li>Wildcard - 10.4.*.*</li>
-			</ul>
-		</p>
-		<form method="POST" action="/">
-			<table border="0" cellpadding="3">
-				<tr>
-					<td>
-						Network <% if @network_size %>(<%= @network_size %> IPs)<% end %>
-					</td>
-					<td>
-						Blacklist <% if @blacklist_size %>(<%= @blacklist_size %> IPs)<% end %>
-					</td>
-					<td>
-						Result <% if @result %>(<%= @result_size%> IPs)<% end %>
-					</td>
-				</tr>
-				<tr valign="top">
-					<td>
-						<textarea name="network" rows="20" cols="30"><%= @network %></textarea>
-						<div style="margin-top:10px;">
-							<input type="submit" name="submit" value="Calc Remainder"/>	
-						</div>
-					</td>
-					<td>
-						<textarea name="blacklist" rows="20" cols="30"><%= @blacklist %></textarea>
-					</td>
-					<td>
-						<div>
-				  			
-				  			<% if @result %> 
-					  			<% for @item in @result %>
-					    			<%= @item %></br>
+		<div class="navbar navbar-fixed-top">
+	      <div class="navbar-inner">
+	        <div class="container-fluid">
+	          
+	          <a class="brand" href="#">CIDR Remainder Calculator</a>
+	        </div>
+	      </div>
+	    </div>
+		<div class="container-fluid">
+			
+			<div class="row-fluid">
+				<div class="span3">
+						<div class="well">	
+						<p>Calculate a remainder CIDR block from a starting list of allowed networks and blacklist networks </p>
+						<h4>Notes</h4>
+						<ul>
+							<li>Supports CIDR (e.g. 10.4.0.0/16) and Wildcard (e.g. 10.4.*.*) input formats</li>
+							<li>Empty lines and whitespace are discarded</li>
+							<li>You will probably break it with bad input - Be nice</li>
+						</ul>
+					</div>
+				</div>
+				<div class="span9">
+					<form method="POST" action="/">
+						<div class="row-fluid">
+							<div class="span">
+								<h3>Network <% if @network_size %>(<%= @network_size %> IPs)<% end %></h3>
+								<textarea name="network" rows="20" cols="30"><%= @network %></textarea>
+							</div>
+							<div class="span">
+								<h3>Blacklist <% if @blacklist_size %>(<%= @blacklist_size %> IPs)<% end %></h3>
+								<textarea name="blacklist" rows="20" cols="30"><%= @blacklist %></textarea>
+							</div>
+							<div class="span">
+								<% if @result %>
+								<h3>Remainder (<%= @result_size%> IPs)</h3>
+								
+						  			<% for @item in @result %>
+						    			<%= @item %></br>
+						  			<% end %>
 					  			<% end %>
-				  			<% end %>
+							</div>
 						</div>
-						
-					</td>
-				<tr>
-			</table>
+						<div class="row-fluid">
+							<input type="submit" name="submit" value="Calc Remainder" class="btn btn-primary btn-large"/>
+						</div>
+						<!--
+						<table border="0" cellpadding="3">
+							<tr>
+								<td>
+									Network <% if @network_size %>(<%= @network_size %> IPs)<% end %>
+								</td>
+								<td>
+									Blacklist <% if @blacklist_size %>(<%= @blacklist_size %> IPs)<% end %>
+								</td>
+								<td>
+									<% if @result %>Remainder (<%= @result_size%> IPs)<% end %>
+								</td>
+							</tr>
+							<tr valign="top">
+								<td>
+									<textarea name="network" rows="20" cols="30"><%= @network %></textarea>
+									<div style="margin-top:10px;">
+										<input type="submit" name="submit" value="Calc Remainder" class="btn btn-primary btn-large"/>	
+									</div>
+								</td>
+								<td>
+									<textarea name="blacklist" rows="20" cols="30"><%= @blacklist %></textarea>
+								</td>
+								<td>
+									<div>
+							  			<% if @result %> 
+								  			<% for @item in @result %>
+								    			<%= @item %></br>
+								  			<% end %>
+							  			<% end %>
+									</div>
+									
+								</td>
+							<tr>
+						</table>-->
+					</form>
+				</div>
 
-		</form>
+			</div>
+		</div>
 	</body>
 </html>
