@@ -12,10 +12,6 @@ def calc_remainder(network, blacklist_addr)
 	return network
 end
 
-def read_file(filename)
-	return IO.readlines(filename)
-end
-
 def to_list(input_string)
 	list = input_string.split("\r\n")
 	list.map!(&:strip)
@@ -41,9 +37,6 @@ def to_cidr_list(list)
 end
 
 def calc_result(network, blacklist)
-	#network = read_file("network.txt")
-	#blacklist = read_file("blacklist.txt")
-
 	network = to_cidr_list(network)
 	blacklist = to_cidr_list(blacklist)
 	blacklist.each do |blacklist_addr|
