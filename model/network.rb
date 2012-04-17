@@ -23,7 +23,6 @@ end
 
 private
 def to_cidr_list(list)
-
 	#TODO: this is pretty basic auto detect of wildcard vs CIDR format.  Would like to add support for IP ranges and some actual validation/error handling
 	cidr_list = list.reduce([]) do |result, element|
 		if element.include?("*")
@@ -36,7 +35,6 @@ def to_cidr_list(list)
 
 	return cidr_list
 end
-
 
 # TODO: the code to support input ranges for whitelist/blacklist would use NetAddr.range and then .merge that down into CIDR blocks
 # would need to do some easy string parsing work to parse out input lines that look like "192.168.35.0-192.168.36.3"
