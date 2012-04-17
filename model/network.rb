@@ -1,16 +1,5 @@
 require 'netaddr'
 
-def calc_remainder(network, blacklist_addr)
-	network.sort! {|a,b| b.size <=> a.size}
-	network.each do |addr|
-		if addr.contains?(blacklist_addr.network)
-			(network << addr.remainder(blacklist_addr, :Objectify => true)).flatten!.delete(addr)
-			break
-		end
-	end
-
-	return network
-end
 
 def to_list(input_string)
 	list = input_string.split("\r\n")
@@ -38,12 +27,18 @@ def to_cidr_list(list)
 	return cidr_list
 end
 
-def calc_result(network, blacklist)
+def get_remainder(network, blacklist)
 	network = to_cidr_list(network)
 	blacklist = to_cidr_list(blacklist)
 	
 	blacklist.each do |blacklist_addr|
-		network = calc_remainder(network, blacklist_addr)
+		network.sort! {|a,b| b.size <=> a.size}
+		network.each do |addr|
+			if addr.contains?(blacklist_addr.network)
+				(network << addr.remainder(blacklist_addr, :Objectify => true)).flatten!.delete(addr)
+				break
+			end
+		end
 	end
 
 	return NetAddr.merge(network)

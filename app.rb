@@ -20,7 +20,7 @@ require './model/network.rb'
   	@network_size = calc_size(network)
   	@blacklist_size = calc_size(blacklist)
 
-  	@result = calc_result(network, blacklist)
+  	@result = get_remainder(network, blacklist)
   	@result_size = calc_size(@result)
     erb :index
   end
