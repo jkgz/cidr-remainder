@@ -17,11 +17,11 @@ require './model/network.rb'
   	@network = to_string(network)
   	@blacklist = to_string(blacklist)
 
-  	@network_size = calc_size(network)
-  	@blacklist_size = calc_size(blacklist)
+  	@network_size = get_size(network)
+  	@blacklist_size = get_size(blacklist)
 
   	@result = get_remainder(network, blacklist)
-  	@result_size = calc_size(@result)
+  	@result_size = get_size(@result)
     erb :index
   end
 

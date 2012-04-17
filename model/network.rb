@@ -1,5 +1,25 @@
 require 'netaddr'
 
+def get_remainder(network, blacklist)
+	network = to_cidr_list(network)
+	blacklist = to_cidr_list(blacklist)
+	
+	blacklist.each do |blacklist_addr|
+		network.sort! {|a,b| b.size <=> a.size}
+		network.each do |addr|
+			if addr.contains?(blacklist_addr.network)
+				(network << addr.remainder(blacklist_addr, :Objectify => true)).flatten!.delete(addr)
+				break
+			end
+		end
+	end
+
+	return NetAddr.merge(network)
+end
+
+def get_size(network)
+	return to_cidr_list(network).map(&:size).reduce(:+)
+end
 
 def to_list(input_string)
 	list = input_string.split("\r\n")
@@ -27,27 +47,6 @@ def to_cidr_list(list)
 	return cidr_list
 end
 
-def get_remainder(network, blacklist)
-	network = to_cidr_list(network)
-	blacklist = to_cidr_list(blacklist)
-	
-	blacklist.each do |blacklist_addr|
-		network.sort! {|a,b| b.size <=> a.size}
-		network.each do |addr|
-			if addr.contains?(blacklist_addr.network)
-				(network << addr.remainder(blacklist_addr, :Objectify => true)).flatten!.delete(addr)
-				break
-			end
-		end
-	end
-
-	return NetAddr.merge(network)
-end
-
-def calc_size(network)
-	network = to_cidr_list(network)
-	return network.map(&:size).reduce(:+)
-end
 
 # TODO: the code to support input ranges for whitelist/blacklist would use NetAddr.range and then .merge that down into CIDR blocks
 # would need to do some easy string parsing work to parse out input lines that look like "192.168.35.0-192.168.36.3"
