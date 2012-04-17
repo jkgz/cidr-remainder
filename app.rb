@@ -23,6 +23,7 @@ require './helpers/helpers'
     @network_size = get_size(network)
     @blacklist_size = get_size(blacklist)
   	@result_size = get_size(result)
+
     erb :index
   end
 
