@@ -21,17 +21,7 @@ def get_size(network)
 	return to_cidr_list(network).map(&:size).reduce(:+)
 end
 
-def to_list(input_string)
-	list = input_string.split("\r\n")
-	list.map!(&:strip)
-	list.reject!(&:empty?)
-	return list
-end
-
-def to_string(input_array)
-	return input_array.join("\r\n")
-end
-
+private
 def to_cidr_list(list)
 
 	#TODO: this is pretty basic auto detect of wildcard vs CIDR format.  Would like to add support for IP ranges and some actual validation/error handling
