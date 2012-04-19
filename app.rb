@@ -8,7 +8,7 @@ require './helpers/helpers'
   get '/' do
   	@network = Helpers.to_multiline_string(Array.[]('10.4.0.0/16', '172.*.*.*', '210.10.4.0-210.10.5.255'))
   	@blacklist = Helpers.to_multiline_string(Array.[]('10.4.99.0/24', '10.4.100.*', '172.6.*.*', '210.10.5.0-210.10.5.127'))
-    erb :index
+    erb :index 
   end
 
   post '/' do
